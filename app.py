@@ -1,6 +1,15 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from config import Config
+from models import db, Usuario, Tarea
 
 app = Flask(__name__)
+
+app.config.from_object(Config)
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def home():
@@ -24,8 +33,13 @@ def create_task():
     return render_template('create_task.html')
 
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        correo = request.form['correo']
+        contraseña = request.form['contrasena']
+        return f"<p>{nombre}, {correo}, {contraseña}<p>"
     return render_template('signup.html')
 
 if __name__ == '__main__':
