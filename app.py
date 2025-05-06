@@ -19,6 +19,11 @@ def list_tasks():
 def login():
     return render_template('login.html')
 
+@app.route('/task/create')
+def create_task():
+    return render_template('create_task.html')
+
+
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
