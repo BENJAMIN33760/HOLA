@@ -22,6 +22,7 @@
         </li>
     </ul>
     <div class="row g-3">
+        {% if tareas %}
         <div class="col-md-6">
             <div class="card p-3">
                 <div class="d-flex justify-content-between">
@@ -136,7 +137,11 @@
                     </div>
                 </div>
             </div>
+            {% else %}
+            <div class="alert alert-info" role="alert">
+                                              No hay tareas registradas.
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

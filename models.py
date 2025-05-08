@@ -12,9 +12,9 @@ class Usuario(db.Model):
     contrasena_hash = db.Column(db.String(256), nullable=False)
     tareas = db.relationship('Tarea', backref='usuario', lazy=True)
     
-    def set_password(self, contrasena):
+    def colocar_contrasena(self, contrasena):
         self.contrasena_hash = generate_password_hash(contrasena)
-    def check_password(self, contrasena):
+    def verificar_contrasena(self, contrasena):
         return check_password_hash(self.contrasena_hash, contrasena)
     def __repr__(self):
         return f'<Usuario {self.nombre}>'

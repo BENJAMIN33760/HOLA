@@ -21,7 +21,7 @@ def about():
 
 @app.route('/tasks')
 def list_tasks():
-    tareas = ["Lavar la ropa", "Limpiar la casa", "Hacer la compra", "Estudiar para el examen", "Hacer ejercicio", "Leer un libro"]
+    tareas = Tarea.query.filter_by(usuario_id=session["usuario_id"]).all()
     return render_template('tasks.html', tareas=tareas)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -34,10 +34,15 @@ def login():
         if usuario and usuario.verificar_contrasena(contrasena):
             session["usuario_id"] = usuario.id 
             session["usuario_nombre"] = usuario.nombre
-            return redirect(url_for('list_task'))
+            return redirect(url_for('list_tasks'))
         else:
             return "Correo o contrasena incorrectos"
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
 
 @app.route('/task/create')
 def create_task():
