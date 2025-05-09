@@ -13,7 +13,7 @@
         <p class="text-muted">Agrega una nueva tarea a tu lista de pendientes.</p>
     </div>
     <div class="col-lg-6">
-        <a href="#" class="btn btn-outline-dark float-end">
+        <a href="{{ url_for('list_tasks')}}" class="btn btn-outline-dark float-end">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
             </svg>
@@ -21,24 +21,25 @@
         </a>
     </div>
 </div>
-<form class="row g-3">
+<form class="row g-3" method="POST" action="{{ url_for('create_task') }}">
     <div class="form-group col-md-6">
         <label for="titulo">Título</label>
-        <input type="text" id="titulo" class="form-control" required autofocus>
+        <input type="text" id="titulo" name="titulo" class="form-control" required autofocus>
     </div>
     <div class="form-group col-md-12">
         <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" class="form-control"></textarea>
+        <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
     </div>
     <div class="form-group col-md-3">
         <label for="fecha" class="form-label">Fecha de culminación</label>
-        <input type="date" id="fecha" class="form-control" required>
+        <input type="date" id="fecha" name="fecha" class="form-control" required>
     </div>
     <div class="form-group col-md-3">
         <label for="prioridad" class="form-label">Prioridad</label>
-        <select id="prioridad" class="form-control" required>
+        <select id="prioridad" name="prioridad" class="form-control" required>
             <option value="Baja">Baja</option>
-            
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
         </select>
     </div>
     <div class="p-2">

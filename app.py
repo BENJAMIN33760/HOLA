@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 from config import Config
 from models import db, Usuario, Tarea
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -44,10 +45,21 @@ def logout():
     session.clear()
     return redirect(url_for('home'))
 
-@app.route('/task/create')
+@app.route('/task/create', methods=['GET', 'POST'])
 def create_task():
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        descripcion = request.form['descripcion']
+        fecha_vencimiento = datetime.strptime(request.form['fecha'], '%Y-%m-%d')
+        prioridad = request.form['prioridad']
+        try:
+            nueva_tarea = Tarea(titulo=titulo, descripcion=descripcion, fecha_vencimiento=fecha_vencimiento, prioridad=prioridad, usuario_id=session['usuario_id'])
+            db.session.add(nueva_tarea)
+            db.session.commit()
+            return redirect(url_for('list_tasks'))
+        except Exception as e:
+            return f"Error al crear la tarea: {e}"
     return render_template('create_task.html')
-
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
