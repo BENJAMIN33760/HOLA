@@ -78,5 +78,10 @@ def signup():
         return f"<p>{nombre}, {correo}, {contrasena}<p>"
     return render_template('signup.html')
 
+@app.route('/task/<int:id>')
+def view_task(id):
+    tarea = Tarea.query.get_or_404(id)
+    return render_template('task.html', tarea=tarea)
+
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5001)
