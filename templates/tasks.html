@@ -40,19 +40,19 @@
                                 <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.6.6 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.6.6 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.6.6 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535z"/>
                                 <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.6.6 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0z"/>
                             </svg>
-                            Mid Priority
+                            {{ tarea.prioridad }}
                         </span>
                     </h6>
                 </div>
                 <div class="text-muted mb-1">
-                    📅 <small>December 14th, 2023</small>
+                    📅 <small>{{ tarea.fecha_vencimiento }}</small>
                 </div>
-                <p class="mb-3">Finish the draft and send it for review.</p>
+                <p class="mb-3">{{ tarea.descripcion }}</p>
                 <div class="row px-3 d-flex">
                     <form class="col-lg-6">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="completado" name="completado"> 
-                            <label class="form-check-label" for="completado">Mark as Completed</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="completada" name="Completada" {% if tarea.completada == True %}checked{% endif %}> 
+                            <label class="form-check-label" for="completada">Marcar como Completada</label>
                         </div>
                     </form>
                     <div class="col-lg-6">
@@ -63,7 +63,7 @@
                             </svg>
                             Eliminar
                         </a>
-                        <a href="#" class="btn btn-sm btn-outline-primary float-end">
+                        <a href="{{ url_for('edit_task', id=tarea.id) }}" class="btn btn-sm btn-outline-primary float-end">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                 <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
                             </svg>
